@@ -9,6 +9,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var product = Provider.of<Product>(context, listen: false);
     var cart = Provider.of<Cart>(context, listen: false);
+
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(ProductDetailsScreen.routeName, arguments: product);
@@ -16,7 +17,7 @@ class ProductItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
-            BoxShadow(color: Colors.black45, spreadRadius: .1, blurRadius: 3),
+            BoxShadow(color: Colors.black45, spreadRadius: .1, blurRadius: 1),
           ],
           borderRadius: BorderRadius.circular(8),
         ),
@@ -52,10 +53,21 @@ class ProductItem extends StatelessWidget {
                     color: Theme.of(context).accentColor,
                   ),
                   onPressed: () {
-                    cart.addItemToCard(
-                      product.id,
-                      product.price,
-                      product.title,
+                    cart.addItemToCard(product.id, product.price, product.title);
+                    Scaffold.of(context).hideCurrentSnackBar();
+                    Scaffold.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Added ${product.title} to card',
+                        ),
+                        duration: Duration(seconds: 2),
+                        action: SnackBarAction(
+                          label: 'UNDO',
+                          onPressed: () {
+                            cart.removeSingleItem(product.id);
+                          },
+                        ),
+                      ),
                     );
                   }),
             ),

@@ -19,7 +19,7 @@ class OrdersScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return ExpansionTile(
               title: Text(
-                '${orders.orders[index].amount} \$',
+                '${orders.orders[index].amount.toStringAsFixed(2)} \$',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -39,7 +39,7 @@ class OrdersScreen extends StatelessWidget {
                     trailing: Chip(
                       backgroundColor: Theme.of(context).primaryColor,
                       label: Text(
-                        '${(product.price * product.quantity)} \$',
+                        '${(product.price * product.quantity).toStringAsFixed(2)} \$',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),

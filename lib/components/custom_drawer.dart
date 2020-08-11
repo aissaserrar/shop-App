@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/providers/orders.dart';
 import 'package:my_shop/screens/orders_screen.dart';
+import 'package:my_shop/screens/user_products_screen.dart';
 import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -14,30 +15,54 @@ class CustomDrawer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          DrawerHeader(
-            child: Text('Shop'),
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+          AppBar(
+            title: Text(
+              'My Shop',
+            ),
+            automaticallyImplyLeading: false,
           ),
           GestureDetector(
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },
             child: ListTile(
-              title: Text('Home'),
-              trailing: Icon(Icons.home),
+              title: Text(
+                'Shop',
+                style: TextStyle(fontSize: 18),
+              ),
+              trailing: Icon(
+                Icons.shop,
+              ),
             ),
           ),
+          Divider(),
           GestureDetector(
             onTap: () {
               Navigator.of(context).pushReplacementNamed(OrdersScreen.routeName);
             },
             child: ListTile(
-              title: Text('My Orders'),
+              title: Text(
+                'My Orders',
+                style: TextStyle(fontSize: 18),
+              ),
               trailing: Chip(
                 label: Text(
                   '${Provider.of<Orders>(context).orders.length}',
                 ),
               ),
+            ),
+          ),
+          Divider(),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(UserProductsScreen.routeName);
+            },
+            child: ListTile(
+              title: Text(
+                'Manage products',
+                style: TextStyle(fontSize: 18),
+              ),
+              trailing: Icon(Icons.edit),
             ),
           ),
         ],

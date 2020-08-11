@@ -45,4 +45,10 @@ class Products with ChangeNotifier {
   void addProduct(Product product) {
     notifyListeners();
   }
+
+  void removeProduct(String productID) {
+    _loadedProducts.removeWhere((element) => element.id == productID);
+
+    notifyListeners();
+  }
 }
