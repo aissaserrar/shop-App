@@ -42,7 +42,22 @@ class Products with ChangeNotifier {
     return _loadedProducts.where((product) => product.isFavorite).toList();
   }
 
-  void addProduct(Product product) {
+  Product findById(String productID) {
+    return _loadedProducts.firstWhere(
+      (element) => element.id == productID.toString(),
+      orElse: () => null,
+    );
+  }
+
+  void addProduct(Product p) {
+    Product product = Product(
+      id: DateTime.now().toString(),
+      title: p.title,
+      description: p.description,
+      price: p.price,
+      imageUrl: p.imageUrl,
+    );
+    _loadedProducts.add(product);
     notifyListeners();
   }
 

@@ -14,7 +14,11 @@ class UserProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('User products'),
         actions: [
-          IconButton(icon: const Icon(Icons.add), onPressed: () {}),
+          IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                Navigator.pushNamed(context, EditProductScreen.routeName);
+              }),
         ],
       ),
       drawer: const CustomDrawer(),
