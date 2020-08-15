@@ -27,17 +27,9 @@ class UserProductsScreen extends StatelessWidget {
         child: ListView.builder(
           itemCount: productsData.items.length,
           itemBuilder: (_, index) => UserProductItem(
+            productID: productsData.items[index].id,
             title: productsData.items[index].title,
             imageUrl: productsData.items[index].imageUrl,
-            removeProduct: () {
-              productsData.removeProduct(productsData.items[index].id);
-            },
-            editProduct: () {
-              Navigator.of(context).pushNamed(
-                EditProductScreen.routeName,
-                arguments: {productsData.items[index].id},
-              );
-            },
           ),
         ),
       ),
